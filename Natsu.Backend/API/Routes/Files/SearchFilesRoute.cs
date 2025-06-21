@@ -38,6 +38,7 @@ public class SearchFilesRoute : INatsuAPIRoute, INeedsAuthorization
         all.Reverse();
 
         var files = all.Skip(offset).Take(limit);
+        interaction.SetPaginationInfo(limit, offset, all.Count, files.Count());
         await interaction.Reply(HttpStatusCode.OK, files);
     }
 }
