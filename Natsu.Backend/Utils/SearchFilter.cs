@@ -32,7 +32,7 @@ public partial class SearchFilter<T>
         var textEx = text.Count > 0 ? buildText(text) : null;
 
         if (propEx != null && textEx != null)
-            expr = Expression.Lambda<Func<T, bool>>(Expression.AndAlso(propEx, textEx), propEx.Parameters);
+            expr = Expression.Lambda<Func<T, bool>>(Expression.AndAlso(Expression.Invoke(propEx, propEx.Parameters), Expression.Invoke(textEx, propEx.Parameters)), propEx.Parameters);
         else
             expr = propEx ?? textEx ?? (x => true);
     }
