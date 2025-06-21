@@ -48,6 +48,8 @@ public class EditFileRoute : INatsuAPIRoute, INeedsAuthorization
             file.Description = payload.Description;
         if (payload.Source != null)
             file.Source = payload.Source;
+        if (payload.NotSafeForWork != null)
+            file.NotSafeForWork = payload.NotSafeForWork.Value;
 
         if (!TaggedFileHelper.Update(file))
         {
@@ -76,4 +78,3 @@ public class EditFileRoute : INatsuAPIRoute, INeedsAuthorization
         public bool? NotSafeForWork { get; set; }
     }
 }
-
