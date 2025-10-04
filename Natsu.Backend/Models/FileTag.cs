@@ -22,6 +22,13 @@ public class FileTag
     public string Name { get; set; } = string.Empty;
 
     /// <summary>
+    /// The color of the tag in RGB separated by commas (e.g., "255,0,0" for red).
+    /// </summary>
+    [BsonElement("color")]
+    [JsonProperty("color")]
+    public string RGBColor { get; set; } = "163,163,245";
+
+    /// <summary>
     /// The parents of this tag. When searching the parent tag, file with this tag will also be included.
     /// </summary>
     [BsonElement("parents")]
