@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson;
+﻿using Midori.Searching;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Natsu.Backend.Utils;
 using Newtonsoft.Json;

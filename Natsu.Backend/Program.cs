@@ -1,5 +1,8 @@
-﻿using Midori.API;
+﻿using System.Diagnostics;
+using System.Net;
+using Midori.API;
 using Midori.Logging;
+using Midori.Networking;
 using Midori.Utils;
 using Natsu.Backend.API.Components;
 using Natsu.Backend.Database;
@@ -27,9 +30,16 @@ public static class Program
             return;
         }
 
-        var server = new APIServer<NatsuAPIInteraction>();
-        server.AddRoutesFromAssembly<INatsuAPIRoute>(typeof(Program).Assembly);
-        server.Start(new[] { $"http://{(RuntimeUtils.IsDebugBuild ? "localhost" : "+")}:6510/" });
+        var server = new HttpServer();
+        server.MapModule<APIServer<NatsuAPIInteraction>>("/", c =>
+        {
+        c.AutoHandleOptions = true;
+            var sw = new Stopwatch();
+            sw.Start();
+            c.AddRoutesFromAssembly<INatsuAPIRoute>(typeof(Program).Assembly);
+            Logger.Log($"{sw.ElapsedMilliseconds}ms");
+        });
+        server.Start(IPAddress.Any, 6510);
 
         Logger.Log("Finished starting!");
         await Task.Delay(-1);

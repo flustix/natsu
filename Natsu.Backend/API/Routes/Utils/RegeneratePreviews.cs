@@ -1,4 +1,4 @@
-﻿using System.Net;
+﻿using Midori.Networking;
 using Midori.API.Components.Interfaces;
 using Midori.Logging;
 using Natsu.Backend.API.Components;

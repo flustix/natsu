@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Net;
 using Midori.API.Components;
 using Midori.API.Components.Interfaces;
 using Midori.API.Components.Json;
+using Midori.Networking;
 using Midori.Utils;
 using MongoDB.Bson;
 using Natsu.Backend.Database.Helpers;
@@ -13,7 +13,6 @@ namespace Natsu.Backend.API.Components;
 public class NatsuAPIInteraction : JsonInteraction<NatsuAPIResponse>, IHasAuthorizationInfo
 {
     protected override string[] AllowedMethods => base.AllowedMethods.Concat(extra_methods).ToArray();
-
     private static readonly string[] extra_methods = { "PATCH" };
 
     public ObjectId UserID { get; private set; } = ObjectId.Empty;
@@ -32,7 +31,7 @@ public class NatsuAPIInteraction : JsonInteraction<NatsuAPIResponse>, IHasAuthor
         base.OnPopulate();
 
         var token = Request.Headers["Authorization"];
-        token ??= Request.Cookies["token"]?.Value;
+        // token ??= Request.Cookies["token"]?.Value;
 
         if (string.IsNullOrEmpty(token))
         {
@@ -118,10 +117,10 @@ public class NatsuAPIInteraction : JsonInteraction<NatsuAPIResponse>, IHasAuthor
     {
         result = default!;
 
-        if (Request.InputStream == Stream.Null)
+        if (Request.BodyStream == Stream.Null)
             return false;
 
-        var body = new StreamReader(Request.InputStream).ReadToEnd();
+        var body = new StreamReader(Request.BodyStream).ReadToEnd();
 
         try
         {
