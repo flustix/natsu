@@ -107,7 +107,7 @@ public class NatsuAPIInteraction : JsonInteraction<NatsuAPIResponse>, IHasAuthor
             foreach (var (field, reason) in errs)
                 AddError(field, reason);
 
-            return ReplyError(HttpStatusCode.BadRequest, "InvalidRequest");
+            return ReplyMessage(HttpStatusCode.BadRequest, "InvalidRequest");
         }
 
         throw new InvalidOperationException($"Expected {typeof(INatsuAPIRoute)} but received {route.GetType()}.");

@@ -23,7 +23,7 @@ public class EmbedRoute : AbstractAssetRoute
             template = AssemblyResources.ReadString("opengraph-video.html");
         else
         {
-            await interaction.ReplyError(HttpStatusCode.BadRequest, $"Unable to create embed for mime type '{mime}'.");
+            await interaction.ReplyMessage(HttpStatusCode.BadRequest, $"Unable to create embed for mime type '{mime}'.");
             return;
         }
 

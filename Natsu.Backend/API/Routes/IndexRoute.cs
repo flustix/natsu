@@ -1,4 +1,5 @@
-﻿using Natsu.Backend.API.Components;
+﻿using Midori.Networking;
+using Natsu.Backend.API.Components;
 
 namespace Natsu.Backend.API.Routes;
 
@@ -8,5 +9,5 @@ public class IndexRoute : INatsuAPIRoute
     public HttpMethod Method => HttpMethod.Get;
 
     public async Task Handle(NatsuAPIInteraction interaction)
-        => await interaction.ReplyMessage("hi");
+        => await interaction.ReplyMessage(HttpStatusCode.OK, "hi");
 }

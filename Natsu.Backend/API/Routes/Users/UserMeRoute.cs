@@ -16,7 +16,7 @@ public class UserMeRoute : INatsuAPIRoute, INeedsAuthorization
 
         if (user is null)
         {
-            await interaction.ReplyError(HttpStatusCode.NotFound, "User not found.");
+            await interaction.ReplyMessage(HttpStatusCode.NotFound, "User not found.");
             return;
         }
 

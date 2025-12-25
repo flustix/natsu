@@ -19,7 +19,7 @@ public class FilesWithTagRoute : INatsuAPIRoute, INeedsAuthorization
 
         if (tag is null || tag.Owner != interaction.UserID)
         {
-            await interaction.Reply(HttpStatusCode.NotFound);
+            await interaction.ReplyMessage(HttpStatusCode.NotFound, "Specified tag not found.");
             return;
         }
 

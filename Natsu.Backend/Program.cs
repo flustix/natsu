@@ -4,6 +4,7 @@ using Midori.API;
 using Midori.Logging;
 using Midori.Networking;
 using Midori.Utils;
+using Natsu.Backend.API;
 using Natsu.Backend.API.Components;
 using Natsu.Backend.Database;
 using Natsu.Backend.Database.Helpers;
@@ -30,15 +31,11 @@ public static class Program
             return;
         }
 
-        var server = new HttpServer();
-        server.MapModule<APIServer<NatsuAPIInteraction>>("/", c =>
-        {
-        c.AutoHandleOptions = true;
-            var sw = new Stopwatch();
-            sw.Start();
-            c.AddRoutesFromAssembly<INatsuAPIRoute>(typeof(Program).Assembly);
-            Logger.Log($"{sw.ElapsedMilliseconds}ms");
-        });
+        var server = new HttpServer {
+            NotFoundModule = new APIRouteModule<NatsuAPIInteraction, NotFoundRoute>()
+        };
+
+        server.RegisterAPI<NatsuAPIInteraction, INatsuAPIRoute>(typeof(Program).Assembly);
         server.Start(IPAddress.Any, 6510);
 
         Logger.Log("Finished starting!");

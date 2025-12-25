@@ -22,7 +22,7 @@ public class FileAddTagRoute : INatsuAPIRoute, INeedsAuthorization
 
         if (file is null || file.Owner != interaction.UserID)
         {
-            await interaction.ReplyError(HttpStatusCode.NotFound, "File not found.");
+            await interaction.ReplyMessage(HttpStatusCode.NotFound, "File not found.");
             return;
         }
 
@@ -30,7 +30,7 @@ public class FileAddTagRoute : INatsuAPIRoute, INeedsAuthorization
 
         if (tag is null || tag.Owner != interaction.UserID)
         {
-            await interaction.ReplyError(HttpStatusCode.NotFound, "Tag not found.");
+            await interaction.ReplyMessage(HttpStatusCode.NotFound, "Tag not found.");
             return;
         }
 

@@ -46,7 +46,7 @@ public class UploadFileRoute : INatsuAPIRoute, INeedsAuthorization
         // check if already exists
         if (TaggedFileHelper.GetByPath(path, interaction.UserID) != null)
         {
-            await interaction.ReplyError(HttpStatusCode.BadRequest, "This path is already used.");
+            await interaction.ReplyMessage(HttpStatusCode.BadRequest, "This path is already used.");
             return;
         }
 
@@ -61,7 +61,7 @@ public class UploadFileRoute : INatsuAPIRoute, INeedsAuthorization
         }
         catch (Exception ex)
         {
-            await interaction.ReplyError(HttpStatusCode.BadRequest, ex.Message);
+            await interaction.ReplyMessage(HttpStatusCode.BadRequest, ex.Message);
             return;
         }
 

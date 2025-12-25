@@ -23,7 +23,7 @@ public class GetFileRoute : INatsuAPIRoute, INeedsAuthorization
 
         if (file is null || file.Owner != interaction.UserID)
         {
-            await interaction.ReplyError(HttpStatusCode.NotFound, "File not found.");
+            await interaction.ReplyMessage(HttpStatusCode.NotFound, "File not found.");
             return;
         }
 

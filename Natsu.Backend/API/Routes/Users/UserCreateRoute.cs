@@ -34,13 +34,13 @@ public class UserCreateRoute : INatsuAPIRoute, INeedsAuthorization
 
         if (!interaction.User.IsAdmin)
         {
-            await interaction.Reply(HttpStatusCode.Forbidden, "You are not allowed to create users.");
+            await interaction.ReplyMessage(HttpStatusCode.Forbidden, "You are not allowed to create users.");
             return;
         }
 
         if (UserHelper.GetByUsername(payload.Username!) is not null)
         {
-            await interaction.Reply(HttpStatusCode.Conflict, "User already exists.");
+            await interaction.ReplyMessage(HttpStatusCode.Conflict, "User already exists.");
             return;
         }
 

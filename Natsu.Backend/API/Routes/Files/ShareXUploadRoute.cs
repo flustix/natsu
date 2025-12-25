@@ -16,7 +16,7 @@ public class ShareXUploadRoute : INatsuAPIRoute, INeedsAuthorization
     {
         if (!interaction.TryGetFile("file", out var file))
         {
-            await interaction.ReplyError(HttpStatusCode.BadRequest, "Missing file.");
+            await interaction.ReplyMessage(HttpStatusCode.BadRequest, "Missing file.");
             return;
         }
 
@@ -24,7 +24,7 @@ public class ShareXUploadRoute : INatsuAPIRoute, INeedsAuthorization
 
         if (TaggedFileHelper.GetByPath(path, interaction.UserID) != null)
         {
-            await interaction.ReplyError(HttpStatusCode.BadRequest, "This path is already used.");
+            await interaction.ReplyMessage(HttpStatusCode.BadRequest, "This path is already used.");
             return;
         }
 
@@ -38,7 +38,7 @@ public class ShareXUploadRoute : INatsuAPIRoute, INeedsAuthorization
         }
         catch (Exception ex)
         {
-            await interaction.ReplyError(HttpStatusCode.BadRequest, ex.Message);
+            await interaction.ReplyMessage(HttpStatusCode.BadRequest, ex.Message);
             return;
         }
 

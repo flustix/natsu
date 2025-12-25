@@ -19,7 +19,7 @@ public class DeleteFileRoute : INatsuAPIRoute, INeedsAuthorization
 
         if (file is null || file.Owner != interaction.UserID)
         {
-            await interaction.ReplyError(HttpStatusCode.NotFound, "File not found.");
+            await interaction.ReplyMessage(HttpStatusCode.NotFound, "File not found.");
             return;
         }
 
@@ -28,6 +28,6 @@ public class DeleteFileRoute : INatsuAPIRoute, INeedsAuthorization
         if (deleted)
             await interaction.Reply(HttpStatusCode.NoContent);
         else
-            await interaction.ReplyError(HttpStatusCode.NotModified, "Failed to delete.");
+            await interaction.ReplyMessage(HttpStatusCode.NotModified, "Failed to delete.");
     }
 }

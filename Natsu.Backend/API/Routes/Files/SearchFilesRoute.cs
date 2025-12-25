@@ -29,7 +29,7 @@ public class SearchFilesRoute : INatsuAPIRoute, INeedsAuthorization
         }
         catch (Exception ex)
         {
-            await interaction.ReplyError(HttpStatusCode.BadRequest, ex.Message);
+            await interaction.ReplyMessage(HttpStatusCode.BadRequest, ex.Message);
             return;
         }
 
