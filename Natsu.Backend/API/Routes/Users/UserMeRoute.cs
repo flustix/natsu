@@ -11,15 +11,5 @@ public class UserMeRoute : INatsuAPIRoute, INeedsAuthorization
     public HttpMethod Method => HttpMethod.Get;
 
     public async Task Handle(NatsuAPIInteraction interaction)
-    {
-        var user = UserHelper.Get(interaction.UserID);
-
-        if (user is null)
-        {
-            await interaction.ReplyMessage(HttpStatusCode.NotFound, "User not found.");
-            return;
-        }
-
-        await interaction.Reply(HttpStatusCode.OK, user);
-    }
+        => await interaction.Reply(HttpStatusCode.OK, interaction.User);
 }
