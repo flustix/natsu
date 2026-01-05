@@ -7,6 +7,7 @@ namespace Natsu.Backend.Database.Helpers;
 public static class TaggedFileHelper
 {
     private static IMongoCollection<TaggedFile> collection => MongoDatabase.GetCollection<TaggedFile>("files");
+    private static IMongoCollection<ImageComparison> comparisons => MongoDatabase.GetCollection<ImageComparison>("image-comparisons");
 
     public static List<TaggedFile> All => collection.Find(_ => true).ToList();
 
@@ -28,4 +29,8 @@ public static class TaggedFileHelper
     }
 
     public static TaggedFile? GetByPath(string id, ObjectId owner) => collection.Find(x => x.FilePath == id && x.Owner == owner).FirstOrDefault();
+
+    public static ImageComparison? GetComparison(ObjectId one, ObjectId two) => comparisons.Find(x => x.File1 == one && x.File2 == two).FirstOrDefault();
+    public static List<ImageComparison> GetComparisons(float percent) => comparisons.Find(x => x.Similarity >= percent).ToList();
+    public static void SaveComparison(ObjectId one, ObjectId two, float similarity) => comparisons.InsertOne(new ImageComparison { File1 = one, File2 = two, Similarity = similarity });
 }

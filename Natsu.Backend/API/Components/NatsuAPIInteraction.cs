@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using Midori.API.Components;
 using Midori.API.Components.Interfaces;
 using Midori.API.Components.Json;
@@ -111,6 +112,12 @@ public class NatsuAPIInteraction : JsonInteraction<NatsuAPIResponse>, IHasAuthor
         }
 
         throw new InvalidOperationException($"Expected {typeof(INatsuAPIRoute)} but received {route.GetType()}.");
+    }
+
+    public float? GetFloatQuery(string name)
+    {
+        var param = GetStringQuery(name);
+        return param != null && float.TryParse(param, CultureInfo.InvariantCulture, out var result) ? result : null;
     }
 
     public bool TryParseBody<T>([NotNullWhen(true)] out T? result)

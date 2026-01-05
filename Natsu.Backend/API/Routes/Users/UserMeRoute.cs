@@ -1,7 +1,6 @@
 ﻿using Midori.Networking;
 using Midori.API.Components.Interfaces;
 using Natsu.Backend.API.Components;
-using Natsu.Backend.Database.Helpers;
 
 namespace Natsu.Backend.API.Routes.Users;
 
