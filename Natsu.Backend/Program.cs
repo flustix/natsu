@@ -8,7 +8,6 @@ using Natsu.Backend.API.Components;
 using Natsu.Backend.Database;
 using Natsu.Backend.Database.Helpers;
 using Natsu.Backend.Tasks;
-using Natsu.Backend.Tasks.Utils;
 using Natsu.Backend.Tests;
 using Natsu.Backend.Utils.Json;
 
@@ -32,7 +31,7 @@ public static class Program
             return;
         }
 
-        TaskRunner.RegisterTask(new ScanForSimilarTask());
+        // TaskRunner.RegisterTask(new ScanForSimilarTask());
         TaskRunner.Start();
 
         var server = new HttpServer

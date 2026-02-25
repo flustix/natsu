@@ -33,7 +33,6 @@ public class ScanForSimilarTask : IScheduledTask
                 }
                 catch (Exception)
                 {
-                    return;
                 }
             }
         }
